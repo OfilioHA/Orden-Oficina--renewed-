@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+flask-sqlalchemy = "*"
+python-dotenv = "*"
+sqlalchemy = "*"
+flask-migrate = "*"
+flask_cors = "*"
+flask-praetorian = "*"
+sqlalchemy-serializer = "*"
+faker = "*"
+colorama = "*"
+
+[dev-packages]
+autopep8 = "*"
+
+[requires]
+python_version = "3.11.5"

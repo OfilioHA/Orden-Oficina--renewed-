@@ -13,3 +13,6 @@ def register_db(app):
     app.config['SQLALCHEMY_ECHO'] = True
     app.config["SQLALCHEMY_RECORD_QUERIES"] = True
     alchemy.init_app(app)
+
+    with app.app_context():
+        alchemy.create_all()

@@ -3,7 +3,7 @@ from app.Controllers import register_bps
 from extensions.alchemy import register_db
 from extensions.cors import register_cors
 from extensions.guard import register_guard
-from extensions.migrate import register_migrate;
+from extensions.migrate import register_migrate
 import dotenv
 dotenv.load_dotenv()
 

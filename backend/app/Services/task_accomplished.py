@@ -1,5 +1,6 @@
 from extensions.alchemy import alchemy as db
 from app.Entities import TaskAccomplished
+from app.Entities import TaskAccomplishedRepository
 
 
 class TaskAccomplishedService():
@@ -18,23 +19,16 @@ class TaskAccomplishedService():
         return new_task
 
     @staticmethod
-    def from_person_dicts(personal, active_round):
+    def from_person(personal, active_round):
 
         personal_list = []
-
         for entry in personal:
-
-            tasklist = __class__.from_person(entry, active_round).all()
-
+            task_list = TaskAccomplishedRepository.from_person(entry, active_round).all()
+            task_accomplished =  [task.to_dict() for task in task_list]
             entry = entry.to_dict(
-                only=('id', 'firstnames', 'lastnames',),
+                only=('id', 'firstnames', 'lastnames', 'gender_id'),
             )
-
-            entry['taskaccomplished'] = [
-                task.to_dict(rules=('-personal',))
-                for task in tasklist
-            ]
-
+            entry['task_accomplished'] = task_accomplished
             personal_list.append(entry)
 
-        return personal_list
+        return []

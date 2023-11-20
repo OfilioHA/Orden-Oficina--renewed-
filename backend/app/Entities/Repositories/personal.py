@@ -9,13 +9,13 @@ class PersonalRepository():
     @staticmethod
     def from_task(task_id, women=False):
 
-        personal = Personal.query\
+        query = Personal.query\
             .join(Gender)\
             .join(TaskCan)\
             .join(Task)\
             .filter(Task.id == task_id)
 
         if (not women):
-            personal.filter(Gender.id != 2)
+            query.filter(Gender.id != 2)
 
-        return personal.all()
+        return query

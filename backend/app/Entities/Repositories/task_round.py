@@ -1,4 +1,4 @@
-from extensions import alchemy as db
+from extensions.alchemy import alchemy as db
 from app.Entities import TaskAccomplished
 from app.Entities import TaskRounds
 from app.Entities import Task

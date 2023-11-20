@@ -5,11 +5,13 @@ from extensions.alchemy import alchemy
 class Personal(alchemy.Model, SerializerMixin):
 
     id = alchemy.Column(alchemy.Integer, primary_key=True)
+    gender_id = alchemy.Column(alchemy.Integer, alchemy.ForeignKey("genders.id"), nullable=False)
     firstnames = alchemy.Column(alchemy.String, nullable=False)
     lastnames = alchemy.Column(alchemy.String, nullable=False)
     birthday = alchemy.Column(alchemy.String)
     active = alchemy.Column(alchemy.Boolean, default=True)
 
+    gender = alchemy.relationship("Gender", backref=alchemy.backref("personal", lazy="dynamic"))
     serialize_rules = ()
 
     def __init__(self, firstname, lastname, birthday, gender_id, type_id):
@@ -19,5 +21,3 @@ class Personal(alchemy.Model, SerializerMixin):
         self.gender_id = gender_id
         self.type_id = type_id
         self.active = True
-
-

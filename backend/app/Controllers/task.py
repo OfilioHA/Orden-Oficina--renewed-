@@ -18,7 +18,7 @@ def index():
 def personal_task(id):
     active_round = TaskRoundService.last_round(id)
     personal = PersonalService.from_task(id)
-    personal = TaskAccomplishedService.from_person(personal, active_round)
+    personal = TaskAccomplishedService.from_personal(personal, active_round)
     return jsonify({
         "list": personal,
         "round": active_round.number

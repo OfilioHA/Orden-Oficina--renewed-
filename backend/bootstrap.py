@@ -4,6 +4,7 @@ from extensions.alchemy import register_db
 from extensions.cors import register_cors
 from extensions.guard import register_guard
 from extensions.migrate import register_migrate
+from extensions.errors import register_error_handler
 import dotenv
 dotenv.load_dotenv()
 
@@ -14,3 +15,4 @@ register_db(app)
 register_cors(app)
 register_guard(app)
 register_migrate(app)
+register_error_handler(app)

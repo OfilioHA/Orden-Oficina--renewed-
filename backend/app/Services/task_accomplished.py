@@ -19,16 +19,15 @@ class TaskAccomplishedService():
         return new_task
 
     @staticmethod
-    def from_person(personal, active_round):
+    def from_personal(personal, active_round):
 
-        personal_list = []
-        for entry in personal:
-            task_list = TaskAccomplishedRepository.from_person(entry, active_round).all()
-            task_accomplished =  [task.to_dict() for task in task_list]
-            entry = entry.to_dict(
+        for index, person in enumerate(personal):
+            task_list = TaskAccomplishedRepository.from_person(person, active_round).all()
+            task_accomplished = [task.to_dict() for task in task_list]
+            entry = person.to_dict(
                 only=('id', 'firstnames', 'lastnames', 'gender_id'),
             )
             entry['task_accomplished'] = task_accomplished
-            personal_list.append(entry)
+            personal[index] = entry
 
-        return []
+        return personal

@@ -25,6 +25,7 @@
 		"@svelteuidev/motion": "^0.15.3",
 		"@svelteuidev/preprocessors": "^0.15.3",
 		"@svelteuidev/prism": "^0.15.3",
+		"axios": "^1.6.2",
 		"dayjs": "^1.11.10"
 	}
 }

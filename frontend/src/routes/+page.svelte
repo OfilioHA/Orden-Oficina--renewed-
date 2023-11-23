@@ -2,12 +2,11 @@
   /** @type {import('./$types').PageData} */
   export let data;
 
-  import TaskList from "../components/task/list.svelte";
-  import { Button } from "@svelteuidev/core";
+  import TaskSelector from "@/components/task/selector.svelte";
+  import TaskPersonal from "@/components/task/personal/index.svelte";
   import { Container } from "@svelteuidev/core";
   import { Grid } from "@svelteuidev/core";
 
-  let clicked = false;
 </script>
 
 <Container>
@@ -19,10 +18,8 @@
       </p>
       <h1>{data.post.title}</h1>
       <div>{data.post.content}</div>
-      <TaskList />
-      <Button on:click={() => (clicked = !clicked)} class="animation-bounce">
-        {clicked ? "Don't click me anymore" : "Click me"}
-      </Button>
+      <TaskSelector />
+      <TaskPersonal />
     </Grid.Col>
   </Grid>
 </Container>

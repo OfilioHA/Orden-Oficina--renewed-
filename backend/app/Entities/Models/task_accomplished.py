@@ -11,7 +11,7 @@ class TaskAccomplished(db.Model, SerializerMixin, UserMixin, DateMixin):
     accomplished_at = db.Column(db.String, nullable=False)
 
     serialize_rules = (
-        '-personal.taskaccomplished',
+        '-personal',
     )
 
     def __init__(self, task_id, task_round_id, personal_id, accomplished_at):

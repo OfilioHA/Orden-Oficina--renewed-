@@ -8,13 +8,18 @@ from app.Entities import Personal
 class TaskRoundRepository():
 
     @staticmethod
-    def task_active_round(id):
+    def from_task(task_id):
         return TaskRounds.query\
             .join(Task)\
-            .filter(Task.id == id)\
+            .filter(Task.id == task_id)\
             .order_by(db.desc(TaskRounds.number))\
             .group_by(Task.id)\
-            .first()
+
+
+    @staticmethod
+    def task_active_round(id):
+        query = __class__.from_task(id)
+        return query.first()
 
     @staticmethod
     def person_tasks_active_round(id, person):

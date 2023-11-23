@@ -1,7 +1,6 @@
 from extensions.alchemy import alchemy as db
 from sqlalchemy_serializer import SerializerMixin
 
-
 class TaskRounds(db.Model, SerializerMixin):
     __tablename__ = "task_rounds"
 
@@ -10,18 +9,6 @@ class TaskRounds(db.Model, SerializerMixin):
     )
 
     id = db.Column(db.Integer, primary_key=True)
-    task_id = db.Column(
-        db.Integer,
-        db.ForeignKey('tasks.id'),
-        nullable=False,
-    )
-
+    task_id = db.Column(db.Integer,db.ForeignKey('tasks.id'),nullable=False)
     number = db.Column(db.Integer)
-
-    task = db.relationship(
-        "Task",
-        backref=db.backref(
-            "taskround",
-            lazy="dynamic"
-        )
-    )
+    task = db.relationship("Task", lazy="select", back_populates="task_round")

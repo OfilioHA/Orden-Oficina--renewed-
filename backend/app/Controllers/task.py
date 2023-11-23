@@ -15,7 +15,14 @@ def index():
 
 
 @task_bp.route("/<int:id>/personal")
-def personal_task(id):
+def task_personal(id):
+    active_round = TaskRoundService.last_round(id)
+    personal = PersonalService.from_task(id)
+    personal = TaskAccomplishedService.from_personal(personal, active_round)
+    return jsonify(personal)
+
+@task_bp.route("/<int:id>/rounds")
+def task_rounds(id):
     active_round = TaskRoundService.last_round(id)
     personal = PersonalService.from_task(id)
     personal = TaskAccomplishedService.from_personal(personal, active_round)

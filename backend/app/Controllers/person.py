@@ -3,7 +3,7 @@ from app.Services import PersonalService
 from app.Entities import Personal
 
 
-person_bp = Blueprint('person', __name__, url_prefix='/person')
+person_bp = Blueprint('personal', __name__, url_prefix='/personal')
 
 
 @person_bp.route('/')
@@ -13,7 +13,7 @@ def index():
     return jsonify(persons)
 
 
-@person_bp.route("/personal", methods=['POST'])
+@person_bp.route("/", methods=['POST'])
 def create():
     req = request.get_json(force=True)
     personal = PersonalService.create(

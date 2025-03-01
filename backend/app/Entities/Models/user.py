@@ -8,8 +8,8 @@ class User(alchemy.Model, SerializerMixin):
     password = alchemy.Column(alchemy.String(128))
     personal_id = alchemy.Column(alchemy.Integer, alchemy.ForeignKey('personal.id'), nullable=False, unique=True)
     is_active = alchemy.Column(alchemy.Boolean, default=True)
-    roles = alchemy.Column(alchemy.Text)
-
+    roles = alchemy.Column(alchemy.String(50), default="user")
+    
     serialize_rules = (
         '-password',
         '-personal_id',

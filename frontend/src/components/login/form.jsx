@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import { FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useSession } from '@/hooks/useSession';
 import { useFetch } from '@/hooks/useFetch';
 import { InputField } from '@/components/utils/inputs/field';
 import { PasswordField } from '@/components/utils/inputs/password';
@@ -9,6 +10,7 @@ import { PasswordField } from '@/components/utils/inputs/password';
 export function LoginForm() {
 
     const fetcher = useFetch();
+    const session = useSession();
 
     const initialValues = {
         username: '',
@@ -23,13 +25,13 @@ export function LoginForm() {
     });
 
     const handleSubmit = useCallback(async (values) => {
-        const { data, status } = await fetcher.makeRequest('/auth/login', {
+        const response = await fetcher.makeRequest('/auth/login', {
             method: 'POST',
             data: values
         });
-        if (status != 200) return;
-        const { token, user } = data;
-
+        if (response?.status != 200) return;
+        const { data: { token, user } } = response;
+        session.handleLogin(token, user);
     }, []);
 
     const formik = useFormik({ initialValues, validationSchema, onSubmit: handleSubmit });

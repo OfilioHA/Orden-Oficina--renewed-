@@ -1,14 +1,19 @@
+import Cookie from 'js-cookie';
 import { useNavigate } from 'react-router';
+import { useUserStore } from '@/store/user';
 
 export function useSession() {
     const navigate = useNavigate();
+    const userStore = useUserStore((state) => state);
 
     const handleLogin = (token, user) => {
-        window.axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        Cookie.set('token', token, { expires: 1 });
+        userStore.updateUser(user);
         navigate('/');
     }
 
     return {
-        handleLogin
+        handleLogin,
+        user: userStore.user
     }
 }

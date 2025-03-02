@@ -12,8 +12,15 @@ export function useSession() {
         navigate('/');
     }
 
+    const handleLogout = () => {
+        Cookie.remove('token');
+        userStore.cleanUser();
+        navigate('/login');
+    }
+
     return {
         handleLogin,
+        handleLogout,
         user: userStore.user
     }
 }

@@ -1,5 +1,6 @@
 import { NavLink } from "react-router";
-import { OverlayTrigger, Tooltip, Nav, Button } from "react-bootstrap";
+import { Nav, Button } from "react-bootstrap";
+import { useSession } from "@/hooks/useSession";
 
 export function SideBar() {
     const items = [
@@ -16,6 +17,8 @@ export function SideBar() {
             to: "/birthdays",
         },
     ];
+
+    const session = useSession();
 
     return (
         <div
@@ -42,6 +45,7 @@ export function SideBar() {
             <div className="d-grid ">
                 <hr className="my-0" />
                 <Button
+                    onClick={session.handleLogout}
                     variant="link"
                     className="text-decoration-none py-2 text-start"
                 >
